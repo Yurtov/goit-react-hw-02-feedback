@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
+
 export const ButtonsList = styled.div`
   display: flex;
   gap: 10px;
+  margin: 10px;
 `;
 
 export const Button = styled.button`
@@ -11,4 +13,7 @@ export const Button = styled.button`
  border-radius: 20%;
  cursor: pointer;
  font-size: 17px;
+ :hover {
+    background-color: #999da3;
+ }
 `;

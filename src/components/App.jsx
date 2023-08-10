@@ -1,6 +1,9 @@
 import { Component } from 'react';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Loyaut } from './Loyaut';
+import { Notification } from './Notification/Notification';
+import { Section } from './Section/Section';
 import { Statistics } from './Statistics/Statistics';
-import { ButtonsList, Button } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -18,42 +21,38 @@ export class App extends Component {
   countTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
-  
+
   countPositiveFeedbackPercentage = () => {
     return Math.round((this.state.good / this.countTotalFeedback()) * 100);
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        <p>Please leave feedback</p>
+    let massage;
+    this.countTotalFeedback() === 0
+      ? (massage = <Notification message="There is no feedback" />)
+      : (massage = (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        ));
 
-        <ButtonsList>
-          <Button type="button" onClick={() => this.heandleBtnClick('bad')}>
-            Bad
-          </Button>
-          <Button type="button" onClick={() => this.heandleBtnClick('neutral')}>
-            Neutral
-          </Button>
-          <Button type="button" onClick={() => this.heandleBtnClick('good')}>
-            Good
-          </Button>
-        </ButtonsList>
-        <p>Statistics</p>
-        <Statistics good={good} neutral={neutral} bad={bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()}/>
-      
-      </div>
+    return (
+      <Loyaut>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            onClickBad={() => this.heandleBtnClick('bad')}
+            onClickNeutral={() => this.heandleBtnClick('neutral')}
+            onClickGood={() => this.heandleBtnClick('good')}
+          ></FeedbackOptions>
+        </Section>
+
+        <Section title="Statistics">{massage}</Section>
+      </Loyaut>
     );
   }
 }
