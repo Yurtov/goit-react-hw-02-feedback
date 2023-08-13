@@ -11,6 +11,7 @@ export const Button = styled.button`
  width: 70px;
  height: 40px;
  border-radius: 20%;
+ text-transform: capitalize;
  cursor: pointer;
  font-size: 17px;
  :hover {

@@ -4,18 +4,16 @@ export const FeedbackOptions = ({
   onClickBad,
   onClickNeutral,
   onClickGood,
+  onClickType,
+  options,
 }) => {
   return (
     <ButtonsList>
-      <Button type="button" onClick={onClickBad}>
-        Bad
-      </Button>
-      <Button type="button" onClick={onClickNeutral}>
-        Neutral
-      </Button>
-      <Button type="button" onClick={onClickGood}>
-        Good
-      </Button>
+      {options.map(option => (
+        <Button type="button" key={option} onClick={()=> onClickType(option)}> 
+          {option}
+        </Button>
+      ))}
     </ButtonsList>
   );
 };

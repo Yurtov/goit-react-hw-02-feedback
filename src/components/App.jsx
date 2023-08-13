@@ -45,9 +45,8 @@ export class App extends Component {
       <Loyaut>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            onClickBad={() => this.heandleBtnClick('bad')}
-            onClickNeutral={() => this.heandleBtnClick('neutral')}
-            onClickGood={() => this.heandleBtnClick('good')}
+            options={Object.keys(this.state)}
+            onClickType={this.heandleBtnClick}
           ></FeedbackOptions>
         </Section>
 
